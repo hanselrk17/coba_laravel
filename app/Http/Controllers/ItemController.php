@@ -65,6 +65,10 @@ class ItemController extends Controller
     public function edit($id)
     {
         $item = ItemModel::where('id',$id)->first();
+        if(!$item){
+            Alert::error('eror', 'itemnya kosong blog');
+            return redirect()->back();
+        } 
         return view('page.edit_item',['item'=>$item]);
     }
 
@@ -155,8 +159,8 @@ class ItemController extends Controller
             'price'=>$request->get('priceItem'),
             'expired_time'=>$request->get('Carbon::parse($request->get("expiredTimeItem"))'),
             'image_url'=>$path_name
-         ]);
-         Alert::success('berhasil', 'item anda telah berhasil dibuat');
-         return Redirect()->route('admin_item.index');
+        ]);
+        Alert::success('berhasil', 'item anda telah berhasil dibuat');
+        return Redirect()->route('admin_item.index');
     }
 }

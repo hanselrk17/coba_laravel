@@ -16,15 +16,29 @@ class ItemSeeder extends Seeder
     {
         DB::table('item')->insert([[
             'name' => 'kepiting',
-            'qty' => 10,
+            'qty' => 100,
             'price' => 100000,
             'expired_time' => '2024-12-30',
             'image_url' => ''
         ],
         [
             'name' => 'lobster',
-            'qty' => 15,
+            'qty' => 150,
             'price' => 150000,
+            'expired_time' => '2024-12-30',    
+            'image_url' => ''
+        ],
+        [
+            'name' => 'udang',
+            'qty' => 150,
+            'price' => 50000,
+            'expired_time' => '2024-12-30',    
+            'image_url' => ''
+        ],
+        [
+            'name' => 'kerang',
+            'qty' => 200,
+            'price' => 20000,
             'expired_time' => '2024-12-30',    
             'image_url' => ''
         ]]);

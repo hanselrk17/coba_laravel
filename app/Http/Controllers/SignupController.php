@@ -115,8 +115,7 @@ class SignupController extends Controller
            'name'=>$request->get('firstNameSignup')." ".$request->get('lastNameSignup'),
            'email'=>$request->get('emailSignup'),
            'password'=>md5($request->get('passwordSignup')),
-           'image_url'=>$path_name,
-           'role'=>'2'
+           'image_url'=>$path_name
         ]);
         Alert::success('berhasil', 'akun anda telah dibuat, sihlakan login');
         return redirect()->route('login-web.index');

@@ -28,7 +28,13 @@ class UsersSeeder extends Seeder
             'password' => md5('123456'),
             'image_url' => '',
             'role' => '2'
-        ]
-    ]);
+        ],
+        [
+            'name' => 'jess',
+            'email' => 'jess@gmail.com',
+            'password' => md5('123456'),
+            'image_url' => '',
+            'role' => '2'
+        ]]);
     }
 }

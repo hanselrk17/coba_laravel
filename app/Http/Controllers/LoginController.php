@@ -118,7 +118,14 @@ class LoginController extends Controller
             return redirect()->route('forgot_password.index');
         }
         
-        Mail::to($user->email)->send(new ForgetPasswordEmail($user));
+        try { 
+            Mail::to($user->email)->send(new ForgetPasswordEmail($user)); 
+        } catch (\Exception $e) {
+            error_log($e); //buat baca eror di console local
+            Alert::error('eror', 'ada kesalahan code');
+            return redirect()->route('forgot_password.index');
+        }
+        
         Alert::success('berhasil', 'sihlakan cek email anda');
         return redirect()->route('login-web.index');
     }

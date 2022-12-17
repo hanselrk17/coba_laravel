@@ -111,7 +111,7 @@
                                     <span class="border px-1 rounded cursor-pointer"><i class="bx bxs-circle me-1" style="color: #14abef"></i><a href="{{route('admin_item.index')}}">Lihat Item Makanan</a></span>
                                 @endif
                                 @if(Auth::user()->role == 2)
-                                    <span class="border px-1 rounded cursor-pointer"><i class="bx bxs-circle me-1" style="color: #ffc107"></i><a href="{{route('admin_item.index')}}">Beli Makanan</a></span>
+                                    <span class="border px-1 rounded cursor-pointer"><i class="bx bxs-circle me-1" style="color: #ffc107"></i><a href="{{route('transaction_buy_item.index')}}">Beli Makanan</a></span>
                                 @endif
                             </div>
                             <div class="chart-container-1">

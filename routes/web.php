@@ -40,20 +40,29 @@ Route::middleware('auth')->group(Function(){
     Route::get('/beli-makanan/{id}',[UserController::class,'beliMakanan'])->name('beli_makanan.userController');
     
     Route::middleware('user')->group(Function(){ // khusus user tapi admin juga bisa masuk karena di middleware user admin juga di allow
-        Route::group(['prefix'=>'user/'],function (){
+        Route::group(['prefix'=>'user'],function (){
             Route::get('/buy/item',[TransactionController::class,'index'])->name('transaction_buy_item.index');
         });
     });    
 
     Route::middleware('admin')->group(Function(){
-        Route::group(['prefix'=>'admin/'],function (){
-            Route::get('/item',[AdminController::class,'tambahItem'])->name('admin_item.index');
-            Route::get('/datatable',[ItemController::class,'dataTable'])->name('item.datatable');
+        Route::get('/pilih_admin',[AdminController::class,'index'])->name('admin.index');
+        Route::group(['prefix'=>'pilih_admin/admin'],function (){
+            Route::get('/tambah_user',[AdminController::class,'userIndex'])->name('admin_user.index');
+            Route::get('/datatable_user',[AdminController::class,'dataTable'])->name('user.datatable');
+            Route::get('/tambah/user',[AdminController::class,'addUserIndex'])->name('tambah_user_index.adminController');
+            Route::post('/tambah/user',[AdminController::class,'addUser'])->name('tambah_user.adminController');
+            Route::get('/tambah/admin',[AdminController::class,'addAdminIndex'])->name('tambah_admin_index.adminController');
+            Route::post('/tambah/admin',[AdminController::class,'addAdmin'])->name('tambah_admin.adminController');
+            Route::get('/delete/user/{id}',[AdminController::class,'destroy'])->name('delete_user.adminController');
+
+            Route::get('/item',[AdminController::class,'itemIndex'])->name('admin_item.index');
+            Route::get('/datatable_item',[ItemController::class,'dataTable'])->name('item.datatable');
             Route::get('/tambah/item',[ItemController::class,'addItemWeb'])->name('tambah_item_web.itemController');
             Route::post('/tambah/item',[ItemController::class,'addItem'])->name('tambah_item.itemController');
             Route::get('/edit/item/{id}',[ItemController::class,'edit'])->name('edit_item.itemController');
             Route::post('/edit/item/{id}',[ItemController::class,'update'])->name('update_item.itemController');
-            Route::get('/delete/{id}',[ItemController::class,'destroy'])->name('delete_item.itemController');
+            Route::get('/delete/item/{id}',[ItemController::class,'destroy'])->name('delete_item.itemController');
         });
     });
 });

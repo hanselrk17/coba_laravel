@@ -108,9 +108,9 @@
                             </div>
                             <div class="d-flex align-items-center ms-auto font-13 gap-2 my-3">
                                 @if(Auth::user()->role == 1)
-                                    <span class="border px-1 rounded cursor-pointer"><i class="bx bxs-circle me-1" style="color: #14abef"></i><a href="{{route('admin_item.index')}}">Lihat Item Makanan</a></span>
+                                    <span class="border px-1 rounded cursor-pointer"><i class="bx bxs-circle me-1" style="color: #14abef"></i><a href="{{route('admin.index')}}">Lihat Menu Admin</a></span>
                                 @endif
-                                @if(Auth::user()->role == 2)
+                                @if(Auth::user()->role == 2 || Auth::user()->role == 1)
                                     <span class="border px-1 rounded cursor-pointer"><i class="bx bxs-circle me-1" style="color: #ffc107"></i><a href="{{route('transaction_buy_item.index')}}">Beli Makanan</a></span>
                                 @endif
                             </div>

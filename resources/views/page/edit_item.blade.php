@@ -23,7 +23,7 @@
     <div class="page-wrapper">
         <div class="page-content">
             <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-                <div class="breadcrumb-title pe-3">Item</div>
+                <div class="breadcrumb-title pe-3">Admin</div>
                 <div class="ps-3">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb mb-0 p-0">
@@ -89,7 +89,7 @@
                                         </div>
                                         <div class="col-sm-9 text-secondary">
                                             <div class="form-group">
-                                                <img class="backup_picture" id="image-prev" alt="Picture" width="200px"  src="{{ $item->image_url ? asset($item->image_url) : asset('images/null.jfif')}}">
+                                                <img class="backup_picture" id="image-prev" alt="Picture" width="200px"  src="{{ $item->image_url ? asset($item->image_url) : asset('images/null.jpg')}}">
                                                 <img id="image" alt="Picture" width="300px"  src="" style="display:none">
                                                 <img id="image-after" alt="After" src="" style="display:none">
                                                 <button id="crop" type="button" class="btn btn-primary" style="display:none; margin-top: 5px" >Crop</button>
@@ -111,7 +111,8 @@
                                     <div class="row">
                                         <label class="col-sm-3 col-form-label"></label>
                                         <div class="col-sm-9">
-                                            <button id="button_submit" type="submit" class="btn btn-info px-5">Edit</button>
+                                            <button id="button_submit" type="submit" class="btn btn-info px-4 me-3">Edit Item</button>
+                                            <a href="{{ route('admin_item.index') }}"><button type="button" class="btn btn-info px-4">Back</button></a>
                                         </div>
                                     </div>
                                 </form>
@@ -157,7 +158,6 @@
         $( "#image-prev" ).click(function()
         {
             $('#formFile').trigger('click');
-
         });
         var $crop = $('#crop');
         var $image = $('#image');
@@ -185,7 +185,6 @@
                     });
                     $image.show();
                     $('#image-prev').hide();
-
                 }
                 reader.readAsDataURL(input.files[0]);
             } else {

@@ -1,5 +1,5 @@
 @extends('layout.app')
-@section('title','Tambah Item')
+@section('title','Tambah Admin')
 
 @section('meta')
     @include('include.meta')
@@ -31,8 +31,8 @@
                             </li>
                             <li class="breadcrumb-item active" aria-current="page">Admin</li>
                             <li class="breadcrumb-item active" aria-current="page">Pilih Admin</li>
-                            <li class="breadcrumb-item active" aria-current="page">Table Item</li>
-                            <li class="breadcrumb-item active" aria-current="page">Tambah Item</li>
+                            <li class="breadcrumb-item active" aria-current="page">Table User</li>
+                            <li class="breadcrumb-item active" aria-current="page">Tambah Admin</li>
                         </ol>
                     </nav>
                 </div>
@@ -40,7 +40,7 @@
             </div>
             <div class="row">
                 <div class="col-xl-9 mx-auto">
-                    <h6 class="mb-0 text-uppercase">Tambah Item</h6>
+                    <h6 class="mb-0 text-uppercase">Tambah Admin</h6>
                     <hr/>
                     <div class="card border-top border-0 border-4 border-info">
                         <div class="card-body">
@@ -48,38 +48,48 @@
                                 <div class="card-title d-flex align-items-center">
                                     <div><i class="bx bxs-user me-1 font-22 text-info"></i>
                                     </div>
-                                    <h5 class="mb-0 text-info">Tambah Item Form</h5>
+                                    <h5 class="mb-0 text-info">Tambah Admin Form</h5>
                                 </div>
                                 <hr/>
-                                <form method="POST" action="{{ route('tambah_item.itemController') }}">
+                                <form method="POST" action="{{ route('tambah_admin.adminController') }}" oninput='repasswordAdmin.setCustomValidity(passwordAdmin.value != repasswordAdmin.value ? "Password tidak sama": "" )'  enctype="multipart/form-data">
                                     {{csrf_field()}}
                                     <div class="row mb-3">
-                                        <label for="inputEnterYourName" class="col-sm-3 col-form-label">Item Name</label>
+                                        <label for="inputEnterYourName" class="col-sm-3 col-form-label">First Name Admin</label>
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control" id="inputEnterYourName" name ="namaItem" placeholder="Nama Item" required>
+                                            <input type="text" class="form-control" id="inputEnterYourName" name ="firstNameAdmin" placeholder="First Nama Admin" required>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
-                                        <label for="inputPhoneNo2" class="col-sm-3 col-form-label">Quantity</label>
+                                        <label for="inputEnterYourName" class="col-sm-3 col-form-label">Last Name Admin</label>
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control" id="inputPhoneNo2" name ="quantityItem" placeholder="Quantity Item" required>
+                                            <input type="text" class="form-control" id="inputEnterYourName" name ="lastNameAdmin" placeholder="Last Nama Admin" required>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
-                                        <label for="inputEmailAddress2" class="col-sm-3 col-form-label">Price</label>
+                                        <label for="inputPhoneNo2" class="col-sm-3 col-form-label">Email Admin</label>
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control" id="inputEmailAddress2" name ="priceItem" placeholder="Item Price" required>
+                                            <input type="email" class="form-control" id="inputPhoneNo2" name ="emailAdmin" placeholder="Email Admin" required>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
-                                        <label for="inputChoosePassword2" class="col-sm-3 col-form-label">Expired Time</label>
+                                        <label for="inputChoosePassword" class="col-sm-3 col-form-label">Password Admin</label>
                                         <div class="col-sm-9">
-                                            <input class="result form-control" type="text" id="date-time" name ="expiredTimeItem" placeholder="Expired Time" required>
+                                            <div class="input-group" id="show_hide_password">
+                                                <input type="password" class="form-control" id="inputChoosePassword" placeholder="Enter Password" name="passwordAdmin" required><a href="javascript:;" class="input-group-text bg-transparent"><i class='bx bx-hide'></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label for="inputChoosePassword" class="col-sm-3 col-form-label" name="passwordSignup">Re-Enter Password Admin</label>
+                                        <div class="col-sm-9">
+                                            <div class="input-group" id="show_hide_repassword">
+                                                <input type="password" class="form-control" id="inputChoosePassword" placeholder="Re-Enter Password" name="repasswordAdmin" required><a href="javascript:;" class="input-group-text bg-transparent"><i class='bx bx-hide'></i></a>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row mb-3">
                                         <div class="col-sm-3">
-                                            <h6 class="mb-0">Gambar Item</h6>
+                                            <h6 class="mb-0">Photo Profile Admin</h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
                                             <input class="form-control" type="file" id="formFile" name="fotoItem" />
@@ -112,8 +122,8 @@
                                     <div class="row">
                                         <label class="col-sm-3 col-form-label"></label>
                                         <div class="col-sm-9">
-                                            <button id="bebas" type="submit" class="btn btn-info px-4 me-3">Tambah Item</button>
-                                            <a href="{{ route('admin_item.index') }}"><button type="button" class="btn btn-info px-4">Back</button></a>
+                                            <button id="bebas" type="submit" class="btn btn-info px-4 me-3">Tambah Admin</button>
+                                            <a href="{{ route('admin_user.index') }}"><button type="button" class="btn btn-info px-4">Back</button></a>
                                         </div>
                                     </div>
                                 </form>
@@ -135,23 +145,31 @@
     <script src="{{asset('js/cropper.js')}}"></script>
     <script src="{{asset('js/jquery-cropper.js')}}"></script>
     <script>
-		$('.datepicker').pickadate({
-			selectMonths: true,
-	        selectYears: true
-		}),
-		$('.timepicker').pickatime()
-	</script>
-	<script>
-		$(function () {
-			$('#date-time').bootstrapMaterialDatePicker({
-				format: 'YYYY-MM-DD HH:mm'
+		$(document).ready(function () {
+			$("#show_hide_password a").on('click', function (event) {
+				event.preventDefault();
+				if ($('#show_hide_password input').attr("type") == "text") {
+					$('#show_hide_password input').attr('type', 'password');
+					$('#show_hide_password i').addClass("bx-hide");
+					$('#show_hide_password i').removeClass("bx-show");
+				} else if ($('#show_hide_password input').attr("type") == "password") {
+					$('#show_hide_password input').attr('type', 'text');
+					$('#show_hide_password i').removeClass("bx-hide");
+					$('#show_hide_password i').addClass("bx-show");
+				}
 			});
-			$('#date').bootstrapMaterialDatePicker({
-				time: false
-			});
-			$('#time').bootstrapMaterialDatePicker({
-				date: false,
-				format: 'HH:mm'
+
+            $("#show_hide_repassword a").on('click', function (event) {
+				event.preventDefault();
+				if ($('#show_hide_repassword input').attr("type") == "text") {
+					$('#show_hide_repassword input').attr('type', 'password');
+					$('#show_hide_repassword i').addClass("bx-hide");
+					$('#show_hide_repassword i').removeClass("bx-show");
+				} else if ($('#show_hide_repassword input').attr("type") == "password") {
+					$('#show_hide_repassword input').attr('type', 'text');
+					$('#show_hide_repassword i').removeClass("bx-hide");
+					$('#show_hide_repassword i').addClass("bx-show");
+				}
 			});
 		});
 	</script>

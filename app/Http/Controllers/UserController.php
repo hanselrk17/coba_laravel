@@ -69,7 +69,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = UserModel::where(['id'=>$id,'password'=>md5($request->get('passwordUser'))])->first();
+        $user = UserModel::where(['id'=>$id,'password'=>bcrypt($request->get('passwordUser'))])->first();
         if (!$user) {
             Alert::error('gagal', 'password salah goblog');
             return redirect()->back();
@@ -124,12 +124,12 @@ class UserController extends Controller
      */
     public function updatePassword(Request $request, $id)
     {
-        $user = UserModel::where(['id'=>$id,'password'=>md5($request->get('passwordUser'))])->first();
+        $user = UserModel::where(['id'=>$id,'password'=>bcrypt($request->get('passwordUser'))])->first();
         if (!$user) {
             Alert::error('gagal', 'password sekarang salah goblog');
             return redirect()->back();
         }
-        $user->password = md5($request->get('passwordBaruUser'));
+        $user->password = bcrypt($request->get('passwordBaruUser'));
         $user->save();
         Alert::success('berhasil', 'password anda berhasil diedit');
         return Redirect()->route('dashboard.index');

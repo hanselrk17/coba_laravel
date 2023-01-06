@@ -114,7 +114,7 @@ class SignupController extends Controller
         UserModel::create([
            'name'=>$request->get('firstNameSignup')." ".$request->get('lastNameSignup'),
            'email'=>$request->get('emailSignup'),
-           'password'=>md5($request->get('passwordSignup')),
+           'password'=>bcrypt($request->get('passwordSignup')),
            'image_url'=>$path_name
         ]);
         Alert::success('berhasil', 'akun anda telah dibuat, sihlakan login');

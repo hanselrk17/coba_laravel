@@ -71,7 +71,7 @@
                                             </div>
                                             <div class="col-sm-9 text-secondary">
                                                 <div class="form-group">
-                                                    <img class="backup_picture" id="image-prev" alt="Picture" width="200px"  src="{{ asset('images/null.jfif') }}">
+                                                    <img class="backup_picture" id="image-prev" alt="Picture" width="200px"  src="{{ asset('images/null.jpg') }}">
                                                     <img id="image" alt="Picture" width="300px"  src="" style="display:none">
                                                     <img id="image-after" alt="After" src="" style="display:none">
                                                     <button id="crop" type="button" class="btn btn-primary" style="display:none; margin-top: 5px" >Crop</button>

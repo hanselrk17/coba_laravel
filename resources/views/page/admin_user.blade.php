@@ -1,5 +1,5 @@
 @extends('layout.app')
-@section('title','Admin')
+@section('title','Tabel User')
 
 @section('meta')
     @include('include.meta')
@@ -24,7 +24,8 @@
                             <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}"><i class="bx bx-home-alt"></i></a>
                             </li>
                             <li class="breadcrumb-item active" aria-current="page">Admin</li>
-                            <li class="breadcrumb-item active" aria-current="page">Table Item</li>
+                            <li class="breadcrumb-item active" aria-current="page">Pilih Admin</li>
+                            <li class="breadcrumb-item active" aria-current="page">Table User</li>
                         </ol>
                     </nav>
                 </div>
@@ -33,7 +34,7 @@
                         <button type="button" class="btn btn-primary">Settings</button>
                         <button type="button" class="btn btn-primary split-bg-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown">	<span class="visually-hidden">Toggle Dropdown</span>
                         </button>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-end">	<a class="dropdown-item" href="javascript:;">Action</a>
+                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-end"><a class="dropdown-item" href="javascript:;">Action</a>
                             <a class="dropdown-item" href="javascript:;">Another action</a>
                             <a class="dropdown-item" href="javascript:;">Something else here</a>
                             <div class="dropdown-divider"></div>	<a class="dropdown-item" href="javascript:;">Separated link</a>
@@ -47,17 +48,21 @@
                         <div class="position-relative">
                             <input type="text" class="form-control ps-5 radius-30" placeholder="Search Order"> <span class="position-absolute top-50 product-show translate-middle-y"><i class="bx bx-search"></i></span>
                         </div>
-                    <div class="ms-auto"><a href="{{ route('tambah_item_web.itemController') }}" class="btn btn-primary radius-30 mt-2 mt-lg-0"><i class="bx bxs-plus-square"></i>Add New Item</a></div>
+                        <div class="ms-auto">
+                            <a href="{{ route('admin.index') }}" class="btn btn-primary radius-30 mt-2 mt-lg-0"><i class="fadeIn animated bx bx-arrow-back"></i>Back</a>
+                            <a href="{{ route('tambah_user_index.adminController') }}" class="btn btn-primary radius-30 mt-2 mt-lg-0"><i class="bx bxs-plus-square"></i>Add New User</a>
+                            <a href="{{ route('tambah_admin_index.adminController') }}" class="btn btn-primary radius-30 mt-2 mt-lg-0"><i class="bx bxs-plus-square"></i>Add New Admin User</a>
+                        </div>
                     </div>
                     <div class="table-responsive">
-                        <table class="table mb-0" id="table_item">
+                        <table class="table mb-0" id="table_user">
                             <thead class="table-light">
                                 <tr>
                                     <th>Name</th>
-                                    <th>Quantity</th>
-                                    <th>Price</th>
-                                    <th>Expired Time</th>
-                                    <th>Gambar Item</th>
+                                    <th>Email</th>
+                                    <th>Image URL</th>
+                                    <th>Role</th>
+                                    <th>Created At</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -76,28 +81,35 @@
 @section('custom_script')
     @include('include.custom_script')
     <script>
-        $('#table_item').dataTable({
-        processing: true,
-        serverSide: true,
-        ajax: "{{ route('item.datatable') }}",
-        columns: [
-            {data: 'name', name: 'name'},
-            {data: 'qty', name: 'qty'},
-            {data: 'price', name: 'price'},
-            {data: 'expired_time', name: 'expired_time',render:function(data, type, row){
-                return moment().format("MMMM Do YYYY");  
-            }},
-            {data: 'image_url', name: 'image_url',render:function(data, type, row){
-                if (data == "") {
-                    return `<img src="{{asset('/')}}images/null.jfif">`
-                }
-                return `<img src="{{asset('/')}}${data}">`
-            }},
-            {orderable:false, searchable:false, data: 'action', name: 'action',render: function(data,type,row){
-                return `<a class="bx bxs-edit btn btn-edit" href="{{route('edit_item.itemController','')}}/${row.id}">edit</a>
-                        <a class="bx bxs-trash btn btn-delete" href="{{route('delete_item.itemController','')}}/${row.id}">delete</a>`;
-            }},
-        ]
+        $('#table_user').dataTable({
+            processing: true,
+            serverSide: true,
+            ajax: "{{ route('user.datatable') }}",
+            columns: [
+                {data: 'name', name: 'name'},
+                {data: 'email', name: 'email'},
+                {data: 'image_url', name: 'image_url',render:function(data, type, row){
+                    if (data == "") {
+                        return `<img src="{{asset('/')}}images/null.jpg">`
+                    }
+                    return `<img src="{{asset('/')}}${data}">`
+                }},
+                {data: 'role', name: 'role',render:function(data, type, row){
+                    if (data == "1") {
+                        return `ADMIN`
+                    }
+                    return `USER`
+                }},
+                {data: 'created_at', name: 'created_at',render:function(data, type, row){
+                    return moment(data).format("MMMM Do YYYY");  
+                }},
+                {orderable:false, searchable:false, data: 'action', name: 'action',render: function(data,type,row){
+                    if (row.role == "2") {
+                        return `<a class="bx bxs-trash btn btn-delete" href="{{route('delete_user.adminController','')}}/${row.id}">delete</a>`;
+                    }
+                    return `admin != didelete`
+                }},
+            ]
         })
     </script>
 @endsection

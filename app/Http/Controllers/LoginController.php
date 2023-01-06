@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\ForgetPasswordEmail;
 use App\Models\UserModel;
 use Illuminate\Http\Request;
+use App\Mail\ForgetPasswordEmail;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -89,12 +90,17 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
-        $user = UserModel::where('email',$request->get('emailLogin'))->where('password',md5($request->get('passwordLogin')))->first();
+        $user = UserModel::where('email',$request->get('emailLogin'))->first();
         if (!$user) {
             Alert::error('Error', 'salah goblog');
             return redirect()->route('login-web.index');
         }
-    
+        
+        if (!Hash::check($request->get('passwordLogin'),$user->password)){
+            Alert::error('Error', 'salah goblog');
+            return redirect()->route('login-web.index');
+        }
+
         Auth::login($user);
         return redirect()->route('dashboard.index');
     }
@@ -143,7 +149,7 @@ class LoginController extends Controller
     public function forgotPasswordSuccess(Request $request, $id)
     {
         $user = UserModel::where('id',$id)->first();
-        $user->password = md5($request->get('newPassword'));
+        $user->password = bcrypt($request->get('newPassword'));
         $user->save();
 
         Alert::success('berhasil', 'password anda telah diganti');

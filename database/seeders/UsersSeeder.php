@@ -18,21 +18,21 @@ class UsersSeeder extends Seeder
         DB::table('users')->insert([[
             'name' => 'Hansel',
             'email' => 'hansel@gmail.com',
-            'password' => md5('123456'),
+            'password' => bcrypt('123456'),
             'image_url' => '',
             'role' => '1'
         ],
         [
             'name' => 'hendra',
             'email' => 'hendra@gmail.com',
-            'password' => md5('123456'),
+            'password' => bcrypt('123456'),
             'image_url' => '',
             'role' => '2'
         ],
         [
             'name' => 'jess',
             'email' => 'jess@gmail.com',
-            'password' => md5('123456'),
+            'password' => bcrypt('123456'),
             'image_url' => '',
             'role' => '2'
         ]]);
